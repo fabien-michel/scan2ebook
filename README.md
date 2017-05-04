@@ -11,7 +11,7 @@ Process scanned JPGs and output PDF for ebook reader
 1. Scan a book to a set of JPGs
 2. Put images into a subfolder in "sources" Folder. eg: sources/My book/page_###.jpg
 3. Fill line in library.csv with name "My book" and set up needed options
-4. run scan2book.py
+4. run scan2ebook.py
 
 ## Book processing options
 
@@ -20,7 +20,7 @@ Required. Name of the book
 
 ### path
 Optional. Indicate folder containing image. The default is to search for the book name folder intou sources folder
-scan2book will fail if no valid path found
+scan2ebook will fail if no valid path found
 
 ### cut_x, cut_y
 Optional. Crop the image at indicated pixels (default to no crop)
