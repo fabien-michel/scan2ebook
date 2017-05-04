@@ -1,0 +1,9 @@
+.~lock*#
+.cache/
+__pycache__/
+venv/
+temp/
+books/
+sources/*
+!sources/.keep
+library.csv
