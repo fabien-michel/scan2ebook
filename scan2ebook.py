@@ -1,8 +1,5 @@
-import csv
 import argparse
-from book import Book
-from generator import ThreadedBookGenerator
-from cache import Cache
+from library import Library
 
 
 parser = argparse.ArgumentParser(description='Convert scanned JPGs to PDF for ebook reader')
@@ -10,25 +7,12 @@ parser.add_argument('-f', '--force', action='store_true',
                     help='Force process book')
 parser.add_argument('-n', '--name', help='Filter book name')
 parser.add_argument('-l', '--library', default='library.csv', help='Library CSV file')
+parser.add_argument('-c', '--complete-new', action='store_true', help='Auto-add missing books in library CSV file')
 args = parser.parse_args()
 
 
-cache = Cache()
-library_file = open(args.library, "r")
-library = csv.DictReader(library_file)
-
-
-for book_csv in library:
-
-    book = Book(**book_csv)
-
-    if args.name and args.name.lower() not in book.name.lower():
-        continue
-
-    print("• {}".format(book))
-
-    if args.force or cache.has_book_change(book):
-        ThreadedBookGenerator(book).process()
-        cache.store_book(book)
-    else:
-        print('  No changes')
+library = Library(args.library)
+if args.complete_new:
+    library.complete_missing_books()
+else:
+    library.process(args.name, args.force)
