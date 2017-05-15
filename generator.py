@@ -66,6 +66,10 @@ class BookPageProcessor:
                     if (page_index >= self.book.flip_alternatively and
                             (page_index - self.book.flip_alternatively) % 2 == 0):
                         page.rotate(180)
+                # Remove half on first and last page
+                if (self.book.remove_half_of_first_and_last and
+                        (page_index == 0 or page_index == len(self.book.pages) - 1)):
+                    page.crop(page.width // 2, 0, page.width, page.height)
                 # Change jpg quality
                 page.compression_quality = self.book.quality
 

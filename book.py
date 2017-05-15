@@ -12,6 +12,7 @@ class Book:
         'flip_alternatively': (int, 0),
         'quality': (int, 40),
         'grayscale': (bool, False),
+        'remove_half_of_first_and_last': (bool, False),
     }
 
     def __init__(self, *args, **kwargs):
